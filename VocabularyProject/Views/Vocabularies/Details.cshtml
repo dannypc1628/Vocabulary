@@ -1,0 +1,58 @@
+﻿@model VocabularyProject.Models.Vocabulary
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vocabulary</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Word)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Word)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartsOfSpeech)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartsOfSpeech)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Chinese)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chinese)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit.Topic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit.Topic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VocabularyType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VocabularyType.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

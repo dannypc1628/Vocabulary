@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="VocabularyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="Topic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BookID" Type="int" />
+        </EntityType>
+        <EntityType Name="Vocabulary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UnitID" Type="int" />
+          <Property Name="Word" Type="nchar" MaxLength="20" />
+          <Property Name="PartsOfSpeech" Type="nchar" MaxLength="10" />
+          <Property Name="Chinese" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeID" Type="int" />
+        </EntityType>
+        <EntityType Name="VocabularyType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Unit__BookID__3F466844">
+          <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+          <End Role="Unit" Type="Self.Unit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Unit">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vocabular__TypeI__4F7CD00D">
+          <End Role="VocabularyType" Type="Self.VocabularyType" Multiplicity="0..1" />
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VocabularyType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vocabulary">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VocabularyDBModelStoreContainer">
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vocabulary" EntityType="Self.Vocabulary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VocabularyType" EntityType="Self.VocabularyType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Unit__BookID__3F466844" Association="Self.FK__Unit__BookID__3F466844">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Unit" EntitySet="Unit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vocabular__TypeI__4F7CD00D" Association="Self.FK__Vocabular__TypeI__4F7CD00D">
+            <End Role="VocabularyType" EntitySet="VocabularyType" />
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VocabularyDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Unit" Relationship="Self.FK__Unit__BookID__3F466844" FromRole="Book" ToRole="Unit" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Topic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BookID" Type="Int32" />
+          <NavigationProperty Name="Book" Relationship="Self.FK__Unit__BookID__3F466844" FromRole="Unit" ToRole="Book" />
+          <NavigationProperty Name="Vocabulary" Relationship="Self.FK__Vocabular__UnitI__440B1D61" FromRole="Unit" ToRole="Vocabulary" />
+        </EntityType>
+        <EntityType Name="Vocabulary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="Word" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="PartsOfSpeech" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Chinese" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Unit" Relationship="Self.FK__Vocabular__UnitI__440B1D61" FromRole="Vocabulary" ToRole="Unit" />
+          <Property Name="TypeID" Type="Int32" />
+          <NavigationProperty Name="VocabularyType" Relationship="VocabularyDBModel.FK__Vocabular__TypeI__4F7CD00D" FromRole="Vocabulary" ToRole="VocabularyType" />
+        </EntityType>
+        <Association Name="FK__Unit__BookID__3F466844">
+          <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+          <End Role="Unit" Type="Self.Unit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Unit">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vocabular__UnitI__440B1D61">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vocabulary">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VocabularyDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Book" EntityType="Self.Book" />
+          <EntitySet Name="Unit" EntityType="Self.Unit" />
+          <EntitySet Name="Vocabulary" EntityType="Self.Vocabulary" />
+          <AssociationSet Name="FK__Unit__BookID__3F466844" Association="Self.FK__Unit__BookID__3F466844">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Unit" EntitySet="Unit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vocabular__UnitI__440B1D61" Association="Self.FK__Vocabular__UnitI__440B1D61">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+          </AssociationSet>
+          <EntitySet Name="VocabularyType" EntityType="VocabularyDBModel.VocabularyType" />
+          <AssociationSet Name="FK__Vocabular__TypeI__4F7CD00D" Association="VocabularyDBModel.FK__Vocabular__TypeI__4F7CD00D">
+            <End Role="VocabularyType" EntitySet="VocabularyType" />
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="VocabularyType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vocabulary" Relationship="VocabularyDBModel.FK__Vocabular__TypeI__4F7CD00D" FromRole="VocabularyType" ToRole="Vocabulary" />
+        </EntityType>
+        <Association Name="FK__Vocabular__TypeI__4F7CD00D">
+          <End Type="VocabularyDBModel.VocabularyType" Role="VocabularyType" Multiplicity="0..1" />
+          <End Type="VocabularyDBModel.Vocabulary" Role="Vocabulary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VocabularyType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vocabulary">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VocabularyDBModelStoreContainer" CdmEntityContainer="VocabularyDBEntities">
+          <EntitySetMapping Name="Book">
+            <EntityTypeMapping TypeName="VocabularyDBModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Unit">
+            <EntityTypeMapping TypeName="VocabularyDBModel.Unit">
+              <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vocabulary">
+            <EntityTypeMapping TypeName="VocabularyDBModel.Vocabulary">
+              <MappingFragment StoreEntitySet="Vocabulary">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="Word" ColumnName="Word" />
+                <ScalarProperty Name="PartsOfSpeech" ColumnName="PartsOfSpeech" />
+                <ScalarProperty Name="Chinese" ColumnName="Chinese" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VocabularyType">
+            <EntityTypeMapping TypeName="VocabularyDBModel.VocabularyType">
+              <MappingFragment StoreEntitySet="VocabularyType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

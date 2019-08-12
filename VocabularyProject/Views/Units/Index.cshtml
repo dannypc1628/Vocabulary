@@ -1,0 +1,63 @@
+﻿@model IEnumerable<VocabularyProject.Models.Unit>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@ViewBag.Title </h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Topic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Topic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Book.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>*@
+
+<div class="row">
+    <div class="col-6">
+                    
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">單元    主題</li>
+                @foreach (var item in Model)
+                {
+                    <li class="list-group-item">@Html.ActionLink(" "+@item.Number +"-"+ @item.Topic,"List", "Vocabularies")  </li>
+                }
+
+                <li class="list-group-item">Porta ac consectetur ac</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+            
+        
+    </div>
+</div>

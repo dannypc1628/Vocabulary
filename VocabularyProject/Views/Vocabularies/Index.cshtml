@@ -1,0 +1,57 @@
+﻿@model IEnumerable<VocabularyProject.Models.Vocabulary>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Word)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PartsOfSpeech)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Chinese)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit.Topic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VocabularyType.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Word)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartsOfSpeech)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Chinese)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Unit.Topic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VocabularyType.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
