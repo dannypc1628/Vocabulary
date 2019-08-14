@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<div class="row" id="view">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{showWord}}</h5>
+            {{showChinese}}
+        </div>
+    </div>
+
+</div>
+<script>
+    var viewSource = @Html.Action("List", new { unitID = 1 });
+    $.ajax({
+        type: 'POST',
+        url: @Url.Action("List"),
+        data: 'unitID='@ViewBag.UnitList ,
+        dataType: "JSON",
+        error: function () { console.log('連線異常') },
+        success: function (returnData) {
+            var viewReturn = returnData;
+                console.log(viewReturn);
+                    
+            }
+        });
+</script>
+@Scripts.Render("~/bundles/vue")

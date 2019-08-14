@@ -20,13 +20,18 @@ namespace VocabularyProject
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.mini.js",
+                      "~/Scripts/bootstrap.min.js",
                       "~/Scripts/popper.min.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/vue").Include(
+                    "~/Scripts/vue.js",
+                    "~/Scripts/view-vocabulary.js"
+                ));
         }
     }
 }

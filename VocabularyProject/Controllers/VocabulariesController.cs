@@ -30,6 +30,17 @@ namespace VocabularyProject.Controllers
             return View(vocabulary.ToList());
         }
 
+        public ActionResult List(int?[] unitID)
+        {
+            var data = vocabularyRepository.WithJSON(unitID);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ViewList(int?[] unitID)
+        {
+            ViewBag.UnitList = unitID;
+            return View("View");
+        }
+
         // GET: Vocabularies/Details/5
         public ActionResult Details(int? id)
         {
