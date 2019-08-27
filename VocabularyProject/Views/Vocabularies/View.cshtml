@@ -5,29 +5,30 @@
 
 <h2>View</h2>
 
-<div class="row" id="view">
-
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">{{showWord}}</h5>
-            {{showChinese}}
+<div class="row  justify-content-center" id="view">
+    <div class="col-12 row justify-content-center">
+        <div class="card" style="width: 24rem;">
+            <div class="card-body text-center ">
+                <h5 class="card-title SansFor size48 m-5">{{showWord}}</h5>
+                <div class="size24 mt-3">{{showPart}}</div>
+                <div class="size24 mt-3">{{showChinese}}</div>
+            </div>
         </div>
     </div>
+    @*<div v-for="item in vocabularyList">
+        <div>{{item.vID}}---{{item.word}}---{{item.chinese}}---</div>
+    </div>
 
+    @(ViewBag.UnitList)*@
+    <div class="col-12">
+        <div class="row justify-content-center">
+            <button type="button" class="btn btn-primary m-2" v-on:click="back" :disabled="index==0">上一個</button>
+            <button type="button" class="btn btn-primary m-2" v-on:click="next" :disabled="index==vocabularyList.length-1">下一個</button>
+        </div>
+    </div>
 </div>
-<script>
-    var viewSource = @Html.Action("List", new { unitID = 1 });
-    $.ajax({
-        type: 'POST',
-        url: @Url.Action("List"),
-        data: 'unitID='@ViewBag.UnitList ,
-        dataType: "JSON",
-        error: function () { console.log('連線異常') },
-        success: function (returnData) {
-            var viewReturn = returnData;
-                console.log(viewReturn);
-                    
-            }
-        });
-</script>
 @Scripts.Render("~/bundles/vue")
+<script>
+    var uLink="@Html.Raw(ViewBag.UnitList)"
+    init(uLink,'@Url.Action("List")');
+</script>

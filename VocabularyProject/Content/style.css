@@ -1,2 +1,15 @@
-﻿body {
+﻿
+@font-face {
+    font-family: 'SansFor';
+    src: url('../fonts/SansForgetica-Regular.otf') format('truetype');
+}
+.SansFor {
+    font-family: 'SansFor';
+}
+
+.size24{
+    font-size:24px;
+}
+.size48 {
+    font-size: 48px;
 }

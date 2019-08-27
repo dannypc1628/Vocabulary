@@ -37,7 +37,18 @@ namespace VocabularyProject.Controllers
         }
         public ActionResult ViewList(int?[] unitID)
         {
-            ViewBag.UnitList = unitID;
+            var s = "";
+            if (unitID.Length > 0)
+            {
+                for (int i = 0; i < unitID.Length; i++)
+                {
+                    if (i > 0)
+                        s = s + "&";
+                    s = s + "unitID=" + unitID[i];
+                }
+                ViewBag.UnitList = s;
+            }
+            
             return View("View");
         }
 

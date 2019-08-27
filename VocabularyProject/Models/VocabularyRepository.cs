@@ -18,6 +18,7 @@ namespace VocabularyProject.Models
                 vID = a.ID,
                 word = a.Word,
                 chinese =a.Chinese,
+                part = a.PartsOfSpeech,
                 bookName= a.Unit.Book.Name,
                 unitID =a.UnitID,
                 unitNumber=a.Unit.Number,
